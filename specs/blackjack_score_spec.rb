@@ -47,9 +47,9 @@ describe 'Blackjack Score' do
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
     # Act
-    score1 = blackjack_score([2, 10])
-    score2 = blackjack_score(['King', 3, 4])
-    score3 = blackjack_score(['King', 'King'])
+    score1 = blackjack_score([2, 10, 1])
+    score2 = blackjack_score(['King', 3, 4, 1])
+    score3 = blackjack_score(['King', 'King', 1])
 
     # Assert
     expect(score1).must_equal 13
