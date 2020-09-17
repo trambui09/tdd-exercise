@@ -5,13 +5,13 @@ VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 def blackjack_score(hand)
 
 
-  hand.each do |card|
-    unless VALID_CARDS.include?(card)
-      raise ArgumentError.new("#{hand} is an invalid hand")
-    end
-  end
+  # hand.each do |card|
+  #   unless VALID_CARDS.include?(card)
+  #     raise ArgumentError.new("#{hand} is an invalid hand")
+  #   end
+  # end
 
-  if hand.length > 5 || hand.length < 2
+  if hand.length > 5 || hand.length < 2 || hand.class != Array
     raise ArgumentError.new("#{hand} is an invalid amount of cards")
   end
 
@@ -20,9 +20,15 @@ def blackjack_score(hand)
   ace_arr = []
 
   hand.each do |card|
+    # check card validity
+    unless VALID_CARDS.include?(card)
+      raise ArgumentError.new("#{hand} is an invalid hand")
+    end
+
     if %w(Jack Queen King).include?(card)
       score += 10
-    elsif [2, 3, 4, 5, 6, 7, 8, 9, 10].include?(card)
+    elsif(card.class == Integer)
+      #elsif [2, 3, 4, 5, 6, 7, 8, 9, 10].include?(card)
       score += card
     elsif card == "Ace"
       ace_arr << card
@@ -30,11 +36,7 @@ def blackjack_score(hand)
   end
 
   ace_arr.each do |element|
-    if score <= 10
-      score += 11
-    else
-      score += 1
-    end
+    score <= 10 ? score += 11 : score += 1
   end
 
   if score > 21
