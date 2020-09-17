@@ -14,36 +14,40 @@ describe 'Blackjack Score' do
     score = blackjack_score([3,4])
     expect(score).must_equal 7
 
+    score_2 = blackjack_score([10,9])
+    expect(score_2).must_equal 19
+
   end
   it 'facecards have values calculated correctly' do
+    # test all of the facecards without the Ace
     score = blackjack_score(["Jack", "Queen"])
     expect(score).must_equal 20
 
-    score = blackjack_score(["King", "Queen"])
-    expect(score).must_equal 20
-    # clarification: face cards not including the Ace right?
+    score = blackjack_score(["King", 5])
+    expect(score).must_equal 15
+    # clarification: face cards not including the Ace right? yes, not including the ace
   end
 
   it 'calculates aces as 11 where it does not go over 21' do
-    score = blackjack_score(["Ace", 10])
-    expect(score).must_equal 21
+    score = blackjack_score(["Ace", 9])
+    expect(score).must_equal 20
 
-    score = blackjack_score(["Ace", "King"])
-    expect(score).must_equal 21
+    score_2 = blackjack_score(["Ace", "King"])
+    expect(score_2).must_equal 21
 
-    score = blackjack_score(["Ace", 6, 4])
-    expect(score).must_equal 21
+    score_3 = blackjack_score([6, 2, "Ace"])
+    expect(score_3).must_equal 19
   end
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
     score = blackjack_score(["Ace", "King", "Queen"])
     expect(score).must_equal 21
 
-    score = blackjack_score(["Ace", 10, 8])
-    expect(score).must_equal 19
+    score_2 = blackjack_score(["Ace", 10, 8])
+    expect(score_2).must_equal 19
 
-    score = blackjack_score(["Ace", 5, "Ace"])
-    expect(score).must_equal 17
+    score_3 = blackjack_score(["Ace", 5, "Ace", 2])
+    expect(score_3).must_equal 19
 
 
   end
